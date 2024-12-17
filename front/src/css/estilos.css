@@ -1,0 +1,68 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centrar todo el contenido verticalmente */
+}
+div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+
+}
+h1, h2 {
+    text-align: center;
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    justify-content: center;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+}
+
+input, button {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    justify-content: center;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    height: 30px; /* Reducido el tamaño del botón */
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#listaProductos {
+    list-style-type: none;
+    padding: 0;
+}
+
+#listaProductos li {
+    background-color: white;
+    padding: 15px;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    border-radius: 4px;
+}
+
+#compra-status {
+    margin-top: 10px;
+}

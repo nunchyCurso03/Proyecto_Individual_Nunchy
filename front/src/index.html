@@ -1,15 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Proyecto Individual Nunchy</title>
+    <link rel="stylesheet" href="css/estilos.css">
     <script src="../node_modules/jquery/dist/jquery.js"></script>
     <script src="javascript/index.js"></script>
-    
-    
+
+
 </head>
+
 <body>
-    <p></p>
+    <h1>Gestión de Productos</h1>
+
+    <!-- Listar Productos -->
+    <div>
+        <h2>Lista de Productos</h2>
+        <button id="cargarProductos">Cargar Productos</button>
+        <ul id="listaProductos"></ul>
+
+        <hr>
+    </div>
+    <!-- Formulario para crear un producto -->
+    <h2>Crear Producto</h2>
+    <div>
+        <form id="formularioCrearProducto" class="form-group">
+            <input type="text" id="nombre" placeholder="Nombre" required><br>
+            <input type="text" id="descripcion" placeholder="Descripción" required><br>
+            <input type="number" id="precio" placeholder="Precio" step="0.01" required><br>
+            <input type="number" id="cantidad" placeholder="Cantidad" required><br>
+            <button type="submit">Crear Producto</button>
+        </form>
+
+        <hr>
+    </div>
+
+    <!-- Formulario para comprar un producto -->
+    <div>
+        <h2>Comprar Producto</h2>
+        <input type="number" id="producto-id-compra" placeholder="ID del Producto">
+        <button id="comprarProducto">Comprar</button>
+        <p id="compra-status"></p>
+    </div>
+
+
+    <!-- Formulario para eliminar un producto -->
+<div>
+    <h2>Eliminar Producto</h2>
+    <input type="number" id="producto-id-eliminar" placeholder="ID del Producto">
+    <button id="eliminarProducto">Eliminar</button>
+    <p id="eliminar-status"></p>
+</div>
+
+
 </body>
+
 </html>
