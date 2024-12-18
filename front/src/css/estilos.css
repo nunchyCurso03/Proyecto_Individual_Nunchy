@@ -39,30 +39,25 @@ input, button {
     justify-content: center;
 }
 
-button {
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
-    height: 30px; /* Reducido el tamaño del botón */
-}
+ 
 
 button:hover {
     background-color: #0056b3;
 }
 
-#listaProductos {
-    list-style-type: none;
-    padding: 0;
+ 
+
+ 
+
+ 
+.mt-4 {
+    margin-top: 1.5rem;
 }
 
-#listaProductos li {
-    background-color: white;
-    padding: 15px;
-    border: 1px solid #ddd;
-    margin-bottom: 10px;
-    border-radius: 4px;
+.table-responsive {
+    overflow-x: auto;
 }
 
-#compra-status {
-    margin-top: 10px;
+th, td {
+    text-align: center;
 }
