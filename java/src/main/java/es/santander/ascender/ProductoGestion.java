@@ -33,18 +33,19 @@ public class ProductoGestion {
         producto.setId(maxId + 1);
         productos.put(producto.getId(), producto);
 
-        //System.out.println("Producto creado: " + producto.getNombre());
+        // System.out.println("Producto creado: " + producto.getNombre());
         return producto;
     }
 
     // 4. Actualizar un producto existente
     public Producto actualizarProducto(Long id, Producto productoActualizado) {
-        Producto productoExistente = productos.get(id);
-        if (productoExistente == null) {
-            System.out.println("Producto no encontrado.");
-            return null;
+        if (!productos.containsKey(id)) { // Verificamos si el ID existe
+            System.out.println("Producto no encontrado. No se puede actualizar.");
+            return null; // Retornamos null si no existe el producto
         }
 
+        // Obtenemos el producto existente y actualizamos sus atributos
+        Producto productoExistente = productos.get(id);
         productoExistente.setNombre(productoActualizado.getNombre());
         productoExistente.setDescripcion(productoActualizado.getDescripcion());
         productoExistente.setPrecio(productoActualizado.getPrecio());
@@ -66,20 +67,45 @@ public class ProductoGestion {
         return true;
     }
 
-    // 6. Comprar un producto (disminuye la cantidad en 1)
-    public String comprarProducto(Long id) {
-        Producto producto = productos.get(id);
+    //6.  Comprar un producto (disminuye la cantidad según la compra)
+public String comprarProducto(Long id, int cantidad) {
+    Producto producto = productos.get(id);
 
+    if (producto == null) {
+        return "Producto no encontrado.";
+    }
+
+    if (producto.getCantidad() < cantidad) {
+        return "Stock insuficiente. Disponible: " + producto.getCantidad();
+    }
+
+    // Calcular el precio total
+    float precioTotal = producto.getPrecio() * cantidad;
+
+    // Actualizar el stock
+    producto.setCantidad(producto.getCantidad() - cantidad);
+
+    return "Compra realizada con éxito. Producto: " + producto.getNombre() +
+           ", Cantidad: " + cantidad +
+           ", Precio total: " + precioTotal +
+           ", Stock restante: " + producto.getCantidad();
+}
+
+
+     //7.  Reponer unidades de un producto (aumenta cantidad de stock)
+     public String reponerProducto(Long id, int cantidad) {
+        Producto producto = productos.get(id);
+    
         if (producto == null) {
             return "Producto no encontrado.";
-        }
-
-        if (producto.getCantidad() <= 0) {
-            return "Producto sin stock disponible.";
-        }
-
-        producto.setCantidad(producto.getCantidad() - 1);
-        return "Compra realizada con éxito. Producto: " + producto.getNombre();
+        }      
+    
+        // Actualizar el stock
+        producto.setCantidad(producto.getCantidad() + cantidad);
+    
+        return "Reponer stock repuesto  con éxito. Producto: " + producto.getNombre() +
+               ", Cantidad: " + cantidad +            
+               ", Stock disponible: " + producto.getCantidad();
     }
 
     // Métodos auxiliares para depuración
@@ -91,5 +117,4 @@ public class ProductoGestion {
         this.productos = productos;
     }
 
-     
 }
