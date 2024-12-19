@@ -67,45 +67,44 @@ public class ProductoGestion {
         return true;
     }
 
-    //6.  Comprar un producto (disminuye la cantidad según la compra)
-public String comprarProducto(Long id, int cantidad) {
-    Producto producto = productos.get(id);
-
-    if (producto == null) {
-        return "Producto no encontrado.";
-    }
-
-    if (producto.getCantidad() < cantidad) {
-        return "Stock insuficiente. Disponible: " + producto.getCantidad();
-    }
-
-    // Calcular el precio total
-    float precioTotal = producto.getPrecio() * cantidad;
-
-    // Actualizar el stock
-    producto.setCantidad(producto.getCantidad() - cantidad);
-
-    return "Compra realizada con éxito. Producto: " + producto.getNombre() +
-           ", Cantidad: " + cantidad +
-           ", Precio total: " + precioTotal +
-           ", Stock restante: " + producto.getCantidad();
-}
-
-
-     //7.  Reponer unidades de un producto (aumenta cantidad de stock)
-     public String reponerProducto(Long id, int cantidad) {
+    // 6. Comprar un producto (disminuye la cantidad según la compra)
+    public String comprarProducto(Long id, int cantidad) {
         Producto producto = productos.get(id);
-    
+
         if (producto == null) {
             return "Producto no encontrado.";
-        }      
-    
+        }
+
+        if (producto.getCantidad() < cantidad) {
+            return "Stock insuficiente. Disponible: " + producto.getCantidad();
+        }
+
+        // Calcular el precio total
+        float precioTotal = producto.getPrecio() * cantidad;
+
+        // Actualizar el stock
+        producto.setCantidad(producto.getCantidad() - cantidad);
+
+        return "Compra realizada con éxito. Producto: " + producto.getNombre() +
+                ", Cantidad: " + cantidad +
+                ", Precio total: " + precioTotal +
+                ", Stock restante: " + producto.getCantidad();
+    }
+
+    // 7. Reponer unidades de un producto (aumenta cantidad de stock)
+    public String reponerProducto(Long id, int cantidad) {
+        Producto producto = productos.get(id);
+
+        if (producto == null) {
+            return "Producto no encontrado.";
+        }
+
         // Actualizar el stock
         producto.setCantidad(producto.getCantidad() + cantidad);
-    
+
         return "Reponer stock repuesto  con éxito. Producto: " + producto.getNombre() +
-               ", Cantidad: " + cantidad +            
-               ", Stock disponible: " + producto.getCantidad();
+                ", Cantidad: " + cantidad +
+                ", Stock disponible: " + producto.getCantidad();
     }
 
     // Métodos auxiliares para depuración
