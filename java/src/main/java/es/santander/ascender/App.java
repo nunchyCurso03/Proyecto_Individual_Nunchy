@@ -47,19 +47,20 @@ public class App {
                     break;
 
                 case 2: // Ver producto por ID
-                System.out.println("=== Ver Producto ===");
-                System.out.print("Ingrese el ID: ");
-                try {
-                    long idVer = Long.parseLong(scanner.nextLine()); // Captura la entrada como cadena y la convierte
-                    Producto producto = productoGestion.getProductoPorId(idVer);
-                    if (producto == null) {
-                        System.out.println("Producto no encontrado.");
-                    } else {
-                        System.out.println(producto);
+                    System.out.println("=== Ver Producto ===");
+                    System.out.print("Ingrese el ID: ");
+                    try {
+                        long idVer = Long.parseLong(scanner.nextLine()); // Captura la entrada como cadena y la
+                                                                         // convierte
+                        Producto producto = productoGestion.getProductoPorId(idVer);
+                        if (producto == null) {
+                            System.out.println("Producto no encontrado.");
+                        } else {
+                            System.out.println(producto);
+                        }
+                    } catch (NumberFormatException e) {
+                        System.out.println("Error: ID no válido. Inténtalo de nuevo.");
                     }
-                } catch (NumberFormatException e) {
-                    System.out.println("Error: ID no válido. Inténtalo de nuevo.");
-                }
                     break;
 
                 case 3: // Crear un nuevo producto
@@ -69,7 +70,7 @@ public class App {
                     System.out.print("Ingrese la descripción: ");
                     String descripcion = scanner.nextLine();
                     System.out.print("Ingrese el precio: ");
-                     
+
                     float precio = -1;
                     int cantidad = -1;
 
@@ -87,63 +88,70 @@ public class App {
                     System.out.println("Producto creado: " + nuevoProducto);
                     break;
 
-                    case 4: // Actualizar un producto
-                    System.out.print("Ingrese el ID del producto a actualizar: ");
-                    long idActualizar = scanner.nextLong();
-                    scanner.nextLine(); // Limpiar el buffer
-                
-                    // Validar si el producto con el ID existe antes de continuar
-                    if (!productoGestion.getProductos().containsKey(idActualizar)) {
-                        System.out.println("Producto no encontrado. No se puede actualizar.");
-                        break; // Salir del caso si no existe el ID
+                case 4: // Actualizar un producto
+                    System.out.println("=== Actualizar Producto ===");
+                    try {
+                        System.out.print("Ingrese el ID del producto a actualizar: ");
+                        long idActualizar = Long.parseLong(scanner.nextLine()); // Captura el ID como cadena 
+                                                                                 
+
+                        // Validar si el producto con el ID existe antes de continuar
+                        if (!productoGestion.getProductos().containsKey(idActualizar)) {
+                            System.out.println("Producto no encontrado. No se puede actualizar.");
+                            break; // Salir del caso si no existe el ID
+                        }
+
+                        // Continuar con la actualización solo si el ID es válido
+                        System.out.print("Ingrese el nuevo nombre: ");
+                        String nuevoNombre = scanner.nextLine();
+                        System.out.print("Ingrese la nueva descripción: ");
+                        String nuevaDescripcion = scanner.nextLine();
+
+                        System.out.print("Ingrese el nuevo precio: ");
+                        float nuevoPrecio = Float.parseFloat(scanner.nextLine()); // Validación del precio
+                        System.out.print("Ingrese la nueva cantidad: ");
+                        int nuevaCantidad = Integer.parseInt(scanner.nextLine()); // Validación de la cantidad
+
+                        Producto productoActualizado = new Producto(idActualizar, nuevoNombre, nuevaDescripcion,
+                                nuevoPrecio, nuevaCantidad);
+                        Producto actualizado = productoGestion.actualizarProducto(idActualizar, productoActualizado);
+
+                        // Confirmación de la actualización
+                        System.out.println("Producto actualizado: " + actualizado);
+                    } catch (NumberFormatException e) {
+                        System.out.println(
+                                "Error: Entrada no válida. Por favor, asegúrese de ingresar números válidos para el ID, precio y cantidad.");
                     }
-                
-                    // Continuar con la actualización solo si el ID es válido
-                    System.out.print("Ingrese el nuevo nombre: ");
-                    String nuevoNombre = scanner.nextLine();
-                    System.out.print("Ingrese la nueva descripción: ");
-                    String nuevaDescripcion = scanner.nextLine();
-                    System.out.print("Ingrese el nuevo precio: ");
-                    float nuevoPrecio = scanner.nextFloat();
-                    System.out.print("Ingrese la nueva cantidad: ");
-                    int nuevaCantidad = scanner.nextInt();
-                
-                    Producto productoActualizado = new Producto(idActualizar, nuevoNombre, nuevaDescripcion,
-                            nuevoPrecio, nuevaCantidad);
-                    Producto actualizado = productoGestion.actualizarProducto(idActualizar, productoActualizado);
-                
-                    // Confirmación de la actualización
-                    System.out.println("Producto actualizado: " + actualizado);
                     break;
 
                 case 5: // Eliminar un producto
-                System.out.println("=== Eliminar Producto ===");
-                System.out.print("Ingrese el ID del producto: ");
-                try {
-                    long idEliminar = Long.parseLong(scanner.nextLine());
-                    boolean eliminado = productoGestion.eliminarProducto(idEliminar);
-                    if (eliminado) {
-                        System.out.println("Producto eliminado con éxito.");
-                    } else {
-                        System.out.println("Producto no encontrado.");
+                    System.out.println("=== Eliminar Producto ===");
+                    System.out.print("Ingrese el ID del producto: ");
+                    try {
+                        long idEliminar = Long.parseLong(scanner.nextLine());
+                        boolean eliminado = productoGestion.eliminarProducto(idEliminar);
+                        if (eliminado) {
+                            System.out.println("Producto eliminado con éxito.");
+                        } else {
+                            System.out.println("Producto no encontrado.");
+                        }
+                    } catch (NumberFormatException e) {
+                        System.out.println("Error: ID no válido. Inténtalo de nuevo.");
                     }
-                } catch (NumberFormatException e) {
-                    System.out.println("Error: ID no válido. Inténtalo de nuevo.");
-                }
                     break;
 
-                    case 6: // Comprar un producto
+                case 6: // Comprar un producto
                     System.out.println("=== Comprar Producto ===");
                     System.out.print("Ingrese el ID del producto: ");
                     try {
                         // Solicitar el ID del producto
                         System.out.print("Ingrese el ID del producto a comprar: ");
                         long idComprar = Long.parseLong(scanner.nextLine());
-                
+
                         // Solicitar la cantidad a comprar
                         System.out.print("Ingrese la cantidad a comprar: ");
                         int cantidadComprar = Integer.parseInt(scanner.nextLine());
-                
+
                         // Realizar la compra
                         String resultado = productoGestion.comprarProducto(idComprar, cantidadComprar);
                         System.out.println(resultado);
@@ -152,18 +160,18 @@ public class App {
                     }
                     break;
 
-                    case 7: // Reponer stock producto
+                case 7: // Reponer stock producto
                     System.out.println("=== Reponer Producto ===");
                     System.out.print("Ingrese el ID: ");
                     try {
                         // Solicitar el ID del producto
                         System.out.print("Ingrese el ID del producto a reponer: ");
                         long idReponer = Long.parseLong(scanner.nextLine());
-                
+
                         // Solicitar la cantidad a comprar
                         System.out.print("Ingrese la cantidad a reponer: ");
                         int cantidadReponer = Integer.parseInt(scanner.nextLine());
-                
+
                         // Realizar la compra
                         String resultado = productoGestion.reponerProducto(idReponer, cantidadReponer);
                         System.out.println(resultado);

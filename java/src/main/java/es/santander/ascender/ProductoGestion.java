@@ -16,7 +16,7 @@ public class ProductoGestion {
     // 1. Obtener un producto por ID
     public Producto getProductoPorId(long id) {
         if (!productos.containsKey(id)) {
-            System.out.println("Producto no encontrado.");
+            //System.out.println("Producto no encontrado.");
             return null;
         }
         return productos.get(id);
@@ -87,7 +87,7 @@ public class ProductoGestion {
 
         return "Compra realizada con éxito. Producto: " + producto.getNombre() +
                 ", Cantidad: " + cantidad +
-                ", Precio total: " + precioTotal +
+                ", Precio total: " + precioTotal +"€" +
                 ", Stock restante: " + producto.getCantidad();
     }
 
