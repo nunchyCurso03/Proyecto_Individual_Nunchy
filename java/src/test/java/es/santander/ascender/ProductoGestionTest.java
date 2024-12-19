@@ -155,10 +155,29 @@ public class ProductoGestionTest {
     }
 
      
+    @Test
+    public void testReponerProducto_Exito() {
+         
+        Producto productoOriginal = new Producto(3, "Producto C", "Descripción C", 100.0f, 10);
+        gestion.getProductos().put(3L, productoOriginal); // Agregar el producto manualmente
+        int cantidadReponer = 20;
+
+        
+        String resultado = gestion.reponerProducto(3L, cantidadReponer);
+
+         
+        assertNotNull(resultado, "El resultado de la reposición no debería ser nulo.");
+        assertEquals("Reponer stock repuesto con éxito. Producto: Producto C, Cantidad: 20, Stock disponible: 30", resultado);
+        assertEquals(30, productoOriginal.getCantidad(), "El stock no ha sido actualizado correctamente.");
+    }
 
     @Test
-    void testReponerProducto() {
+    public void testReponerProducto_ProductoNoExistente() {
+         
+        String resultado = gestion.reponerProducto(99L, 10);
 
+        
+        assertEquals("Producto no encontrado.", resultado, "Debería retornar 'Producto no encontrado'.");
     }
 
      

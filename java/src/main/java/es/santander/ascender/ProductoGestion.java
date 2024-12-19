@@ -102,7 +102,7 @@ public class ProductoGestion {
         // Actualizar el stock
         producto.setCantidad(producto.getCantidad() + cantidad);
 
-        return "Reponer stock repuesto  con éxito. Producto: " + producto.getNombre() +
+        return "Reponer stock repuesto con éxito. Producto: " + producto.getNombre() +
                 ", Cantidad: " + cantidad +
                 ", Stock disponible: " + producto.getCantidad();
     }
