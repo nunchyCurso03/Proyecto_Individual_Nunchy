@@ -116,7 +116,7 @@ public class ProductoGestionTest {
 
         assertNotNull(resultado, "El resultado de la compra no debería ser nulo.");
         assertEquals(
-                "Compra realizada con éxito. Producto: Producto A, Cantidad: 5, Precio total: 500.0, Stock restante: 5",
+                "Compra realizada con éxito. Producto: Producto A, Cantidad: 5, Precio total: 500.0€, Stock restante: 5",
                 resultado);
         assertEquals(5, productoOriginal.getCantidad(), "El stock restante no coincide.");
     }
